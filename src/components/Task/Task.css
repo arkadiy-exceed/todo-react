@@ -1,0 +1,70 @@
+.task {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    min-height: 50px;
+    background-color: rgb(107, 107, 107);
+    padding: 10px 15px;
+    margin-bottom: 15px;
+}
+.task:last-child {
+    margin-bottom: 0;
+}
+.task__text {
+    width: 80%;
+    margin-right: 10px;
+}
+.task__text p {
+    width: 100%;
+    font-size: 20px;
+    margin: 0;
+}
+.task__buttons {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn-done {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+.btn-delete {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #000;
+    text-transform: uppercase;
+    background-color: rgb(255, 255, 255);
+    transition: all .2s linear;
+}
+.btn-delete:hover {
+    background-color: rgb(211, 211, 211);
+}
+.done {
+    opacity: .5;
+    transition: all .2s linear;
+}
+
+.like {
+    display: none;
+    position: absolute;
+    top: 21px;
+    left: -40px;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    transition: all .2s linear;
+}
+.like__img {
+    width: 100%;
+}
+.like-block {
+    display: block;
+}
