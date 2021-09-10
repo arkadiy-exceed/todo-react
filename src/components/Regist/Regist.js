@@ -11,7 +11,7 @@ class Regist extends Component {
                 <form className='form'>
                     <div className='form__wrapper'>
 
-                        <label for='email_field'>
+                        <label htmlFor='email_field'>
                             Enter your email
                         </label>
                         <input
@@ -21,7 +21,7 @@ class Regist extends Component {
                             name='login'
                         />
 
-                        <label for='pass_field'>
+                        <label htmlFor='pass_field'>
                             Create a password
                         </label>
                         <input
@@ -31,7 +31,7 @@ class Regist extends Component {
                             name='password'
                         />
 
-                        <label for='login_field'>
+                        <label htmlFor='login_field'>
                             Enter a username
                         </label>
                         <input

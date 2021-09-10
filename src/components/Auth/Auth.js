@@ -10,7 +10,7 @@ class Auth extends Component {
                 <h2 className='form-title'>sign in</h2>
                 <form className='form'>
                     <div className='form__wrapper'>
-                        <label for='login_field'>
+                        <label htmlFor='login_field'>
                             Username
                         </label>
                         <input
@@ -20,7 +20,7 @@ class Auth extends Component {
                             name='login'
                         />
 
-                        <label for='pass_field'>
+                        <label htmlFor='pass_field'>
                             Password
                         </label>
                         <input
