@@ -1,17 +1,39 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 import './Regist.css'
 
 class Regist extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            inputPassword: '',
+            inputUsername: ''
+        }
+        this.submitForm = this.submitForm.bind(this)
+    }
+    
+    submitForm(e) {
+        e.preventDefault()
+
+        axios.post('http://localhost:5000/auth/registration', {
+            username: this.state.inputUsername,
+            password: this.state.inputPassword
+        }).then(res => console.log(res))
+    }
+
     render() {
         return (
             <div className="form-body">
                 <h2 className='form-title'>sign up</h2>
-                <form className='form'>
+                <form 
+                    onSubmit={this.submitForm} 
+                    className='form'
+                >
                     <div className='form__wrapper'>
 
-                        <label htmlFor='email_field'>
+                        {/* <label htmlFor='email_field'>
                             Enter your email
                         </label>
                         <input
@@ -19,12 +41,15 @@ class Regist extends Component {
                             id='email_field'
                             type='email'
                             name='login'
-                        />
+                        /> */}
 
                         <label htmlFor='pass_field'>
                             Create a password
                         </label>
                         <input
+                             onChange={e => this.setState({
+                                inputPassword: e.target.value
+                            })}
                             className='form__input'
                             id='pass_field'
                             type='password'
@@ -35,6 +60,9 @@ class Regist extends Component {
                             Enter a username
                         </label>
                         <input
+                            onChange={e => this.setState({
+                                inputUsername: e.target.value
+                            })}
                             className='form__input'
                             id='login_field'
                             type='text'
