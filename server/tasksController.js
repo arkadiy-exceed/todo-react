@@ -41,38 +41,31 @@ class taskController {
         }
     }
 
-    async changeTaskDone(req, res) {
+    async updateTask(req, res) {
         const id = req.params.id;
-        const {done} = req.body;
+        const {done, like} = req.body;
         console.log(done)
         try {
-            const task = await Task.findByIdAndUpdate(id, {
-                done: done
-            }, {
-                new: true
-            })
-            res.send(task)
-
+            if(typeof(done) !== 'undefined') {
+                const updateTask = await Task.findByIdAndUpdate(id, {
+                    done: done
+                }, {
+                    new: true
+                })
+                res.send(updateTask)
+            } else if (typeof(like) !== 'undefined') {
+                const updateTask = await Task.findByIdAndUpdate(id, {
+                    like: like
+                }, {
+                    new: true
+                })
+                res.send(updateTask)
+            }
         } catch(e) {
 
         }
     }
 
-    async changeTaskLike(req, res) {
-        const id = req.params.id;
-        const {like} = req.body;
-        console.log(like)
-        try {
-            const task = await Task.findByIdAndUpdate(id, {
-                like: like
-            }, {
-                new: true
-            })
-            res.send(task)
-        } catch(e) {
-
-        }
-    }
 }
 
 module.exports = new taskController();

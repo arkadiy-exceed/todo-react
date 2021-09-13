@@ -13,7 +13,7 @@ class TaskWrapper extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            todos: [
+            todos: [   
                 // {id: 1, text: 'task1', done: false, like: false},
                 // {id: 2, text: 'task2', done: false, like: false},
                 // {id: 3, text: 'task3', done: false, like: false}
@@ -43,6 +43,7 @@ class TaskWrapper extends Component {
     }
 
     handleChangeDone(id, done) {
+        console.log('efe')
         axios.put(`http://localhost:5000/tasks/${id}`, {
             done: !done
         }).then(res => {
