@@ -1,4 +1,14 @@
 const User = require('./models/UserModel');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const {secret} = require('./config.js')
+
+const generateAccessToken = (id) => {
+    const payload = {
+        id
+    }
+    return jwt.sign(payload, secret, {expiresIn: '24h'})
+} 
 
 class authController {
     async registration(req, res) {
@@ -20,41 +30,55 @@ class authController {
                     error: 'existing username'
                 })
             } else {
+                const hashPassword = bcrypt.hashSync(password, 7);
                 const user = await User.create({
                     email: email,
                     username: username,
-                    password: password
+                    password: hashPassword
                 });
     
                 res.send(user)
                 console.log(user)
             } 
+            const token = generateAccessToken(user._id)
+            console.log(token)
+            return res.json({token})
         } catch(e) {
 
         }
     }
 
+
+
     async login(req, res) {
         const { username, password } = req.body;
-        
+        console.log(req.body)
         try {
-            const userName =  await User.findOne({
+            const user =  await User.findOne({
                 username: username
             })
-            const userPassword =  await User.findOne({
-                password: password
-            })
-            if (!userName) {
+            console.log(user)
+            if (!user) {
                 res.send({
                     error: 'user doesnt exist'
                 })
-            } else if (!userPassword) {
+            }
+            // const userPassword =  await User.findOne({
+            //     password: password
+            // })
+            const validPassword = bcrypt.compareSync(password, user.password)
+            if (!validPassword) {
                 res.send({
                     error: 'invalid password'
                 })
-            } else {
-                res.send('success')
-            }
+                console.log(validPassword)
+            } 
+            // else {
+            //     res.send('success')
+            // }
+            const token = generateAccessToken(user._id)
+            console.log(token)
+            return res.json({token})
             
         } catch(e) {
 
