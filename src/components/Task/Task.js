@@ -18,7 +18,7 @@ class Task extends Component {
                 </div>
                 <div 
                     className='task__text' 
-                    onDoubleClick={() => handleChangeLike(id)}
+                    onDoubleClick={() => handleChangeLike(id, like)}
                 >
                     <p>{text}</p>
                 </div>
@@ -27,7 +27,7 @@ class Task extends Component {
                         type='checkbox'
                         className='btn-done'
                         checked={done}
-                        onChange={() => {handleChangeDone(id)}}
+                        onChange={() => handleChangeDone(id, done)}
                     />
                     <button 
                         className='btn-delete'

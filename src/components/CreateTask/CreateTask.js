@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import axios from "axios";
 
 import './CreateTask.css'
 
@@ -11,6 +12,7 @@ class CreateTask extends Component {
             inputValue: ''
         }
         this.changeValue = this.changeValue.bind(this)
+        this.postTask = this.postTask.bind(this)
     }
 
     changeValue(e) {
@@ -18,9 +20,20 @@ class CreateTask extends Component {
             inputValue: e.target.value
         })
     }
+
+    postTask() {
+        axios.post('http://localhost:5000/tasks/', {
+            text: this.state.inputValue,
+            done: false,
+            like: false
+        }).then(res=> {
+            console.log(res)
+            this.props.addTask(res.data)
+        })
+    }
     
     render() {
-        const {placeholder, addTask} = this.props
+        const {placeholder} = this.props
         return(
             <div className='task-form'>
                 <div className='task-form__input'>
@@ -37,7 +50,7 @@ class CreateTask extends Component {
                             if(this.state.inputValue === '') {
                                 return
                             } else {
-                                addTask(this.state.inputValue)
+                                this.postTask();
                                 this.setState({inputValue: ''})
                             } 
                         }}
